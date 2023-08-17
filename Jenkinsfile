@@ -1,5 +1,7 @@
 pipeline {
-    agent "python_chromedriver"
+    agent {
+       label "python_chromedriver"
+    } 
     stages {
         stage ("Run") {
             steps {

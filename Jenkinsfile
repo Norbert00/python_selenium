@@ -1,6 +1,9 @@
 pipeline {
     agent {
        label "python_chromedriver"
+    }
+    environment {
+        recipientEmails = "nocnica@protonmail.com"
     } 
     stages {
         stage ("Run") {

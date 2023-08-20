@@ -1,7 +1,7 @@
 pipeline {
     agent {
        docker {
-        image "selenium/standalone-chrome:latest"
+        image "norbert00/jenkins_ssh_pyton_selenium_chromedriver_node:v6"
        }
     }
     environment {

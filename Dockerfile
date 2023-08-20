@@ -40,5 +40,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install google-chrome-s
 RUN pip install selenium  \
     pip install webdriver-manager
 
+ADD ./seleniumpy.py /home/jenkins
+
 RUN    echo "alias python=python3" >> ~/.bashrc
 

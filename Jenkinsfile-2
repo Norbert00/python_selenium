@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage ("Test") {
             steps {
-                sh "python3 ${env.WORKSPACE}/seleniumpy.py"
+                sh "python3 ${env.WORKSPACE}/selenium_test/seleniumpy.py"
             }
         }
     }

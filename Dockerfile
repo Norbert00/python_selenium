@@ -10,20 +10,20 @@ RUN apt-get update && \
     wget unzip && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Download the chromedriver zip and chrome-stable-version files and save it to /tmp
-RUN wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip" -O /tmp/chromedriver.zip 
+# Download the chromedriver zip and chrome-stable-version files and save it to /home
+RUN wget -q "https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip" -O /home/chromedriver.zip 
 
-# Unzip the chromedriver zip file to /tmp/
-RUN unzip /tmp/chromedriver.zip -d /tmp/ && \
-    chmod 777 /tmp/chromedriver-linux64/chromedriver && \
-    rm /tmp/chromedriver.zip
+# Unzip the chromedriver zip file to /home/
+RUN unzip /home/chromedriver.zip -d /home/ && \
+    chmod 777 /home/chromedriver-linux64/chromedriver && \
+    rm /home/chromedriver.zip
 
 
 # Second stage - Final image
 FROM jenkins/ssh-agent:latest
 
 # Copy the chromedriver binary from the builder stage to the final stage
-COPY --from=builder /tmp/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
+COPY --from=builder /home/chromedriver-linux64/chromedriver /usr/local/bin/chromedriver
 
 # Install pip3 wget and gnupg2
 RUN apt-get update && \
@@ -42,5 +42,7 @@ RUN pip install selenium  \
 
 ADD ./seleniumpy.py /home/jenkins
 
-RUN    echo "alias python=python3" >> ~/.bashrc
+#RUN    echo "alias python=python3" >> ~/.bashrc
+
+#CMD [ "/bin/bash" ]
 

@@ -2,6 +2,7 @@ pipeline {
     agent {
        docker {
         image "norbert00/jenkins_ssh_pyton_selenium_chromedriver_node:v6"
+        args '--entrypoint=/bin/bash'
        }
     }
     environment {
